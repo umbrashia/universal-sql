@@ -1,0 +1,18 @@
+from HadoopHiveSparkSql import HadoopHiveSparkSql
+
+print(HadoopHiveSparkSql.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("ram=(select id from users)")
+      .where("city=", "delhi")
+      .orWhere("seller=",'100')
+      .orWhere("brand=",'rock')
+      .having("city=", "delhi")
+      .orHaving("seller=",'100')
+      .orHaving("brand=",'rock')
+      .whereBetween("age",[200,300])
+      .join("users","users.id=employee.emp_id","left")
+      .join("cars","cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID","desc")
+      .limit(10,20).get())
