@@ -1,6 +1,6 @@
-from HadoopHiveSparkSql import HadoopHiveSparkSql
+from UniversalSqlBuilder import UniversalSqlBuilder
 
-print(HadoopHiveSparkSql.table("employee")
+print(UniversalSqlBuilder.table("employee")
       .select("id,name")
       .select(",department")
       .where("ram=(select id from users)")

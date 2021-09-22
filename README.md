@@ -1,4 +1,4 @@
-# hadoop-hive-spark-sql
+# Universal SQL Builder
 SQL framework ORM independent, it helps you build sql query in python<br/>
 What ever you using Hive, HBase, Spark* SQL, Django & FLASK etc so you can gernate simple SQL query<br/>
 Its return raw sql query string this can be use in any Framework<br/>

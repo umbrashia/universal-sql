@@ -8,4 +8,4 @@ class UniversalSqlBuilder:
         return SqlLoader().table(tableName)
 
 
-print(UniversalSqlBuilder.table("employee").groupBy("department").get())
+# print(UniversalSqlBuilder.table("employee").groupBy("department").get())

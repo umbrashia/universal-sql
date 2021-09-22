@@ -1,4 +1,4 @@
-import cgi
+import html
 
 class SqlLoader:
     selectList = list()
@@ -56,28 +56,28 @@ class SqlLoader:
         if not value:
             self.whereList.append(keyOrRaw)
         else:
-            self.whereList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+            self.whereList.append(keyOrRaw+"'"+html.escape(str(value))+"'")
         return self
 
     def orWhere(self, keyOrRaw, value=""):
         if not value:
             self.orWhereList.append(keyOrRaw)
         else:
-            self.orWhereList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+            self.orWhereList.append(keyOrRaw+"'"+html.escape(str(value))+"'")
         return self
 
     def having(self, keyOrRaw, value=""):
         if not value:
             self.havingList.append(keyOrRaw)
         else:
-            self.havingList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+            self.havingList.append(keyOrRaw+"'"+html.escape(str(value))+"'")
         return self
 
     def orHaving(self, keyOrRaw, value=""):
         if not value:
             self.orHavingList.append(keyOrRaw)
         else:
-            self.orHavingList.append(keyOrRaw+"'"+cgi.escape(str(value))+"'")
+            self.orHavingList.append(keyOrRaw+"'"+html.escape(str(value))+"'")
         return self
 
     def limit(self, limitValue, offset=0):
