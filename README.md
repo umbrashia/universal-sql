@@ -4,8 +4,9 @@ What ever you using Hive, HBase, Spark* SQL, Django & FLASK etc so you can gerna
 Its return raw sql query string this can be use in any Framework<br/>
 
 <br/><h3>Installation</h3>
-Clone or Download all file in your lib(any folder) and see in the example.py 
-
+Step 1: pip install universal-sql-builder<br/>
+Step 2: <code>from UniversalSqlBuilder import UniversalSqlBuilder</code><br/>
+Step 3: Flow the examples....
 
 
 <!--New Section **************************-->
@@ -31,7 +32,8 @@ UniversalSqlBuilder.table("employee").select("id,name").select(",department").wh
 <br/><h4>OrWhere and WhereBetween</h4>
 If you want data according min and max  use : <br/>
 <code>
-whereBetween("age",[200,300]) 
+whereBetween("age",[200,300]) </code>
+<code>
 UniversalSqlBuilder.table("employee").select("id,name").whereBetween("age",[200,300]).get()
 </code><br/>
 Using OR with where :<br>
@@ -51,7 +53,7 @@ Use order by : orderBy("ID","desc") 
 
 <br><code>UniversalSqlBuilder.table("employee").select("id,name").orderBy("ID","desc").get()</code>
 
-use with limit : imit(10,20)
+use with limit : limit(10,20)
 
 <br><code>UniversalSqlBuilder.table("employee").select("id,name").limit(10,20).get()</code>
 
@@ -83,6 +85,54 @@ Or you can use raw where query : having("col=(select id from users)")<br/>
 <code>
 UniversalSqlBuilder.table("employee").select("id,name").select(",department").having("id=(select id from users)").having("city=", "delhi").get()
 </code>
+
+<!--New Section **************************-->
+<br/><h4>Making Advance Query</h4>
+Using OR with Having :<br>
+<code>
+print(UniversalSqlBuilder.table("employee")
+      .select("id,name")
+      .select(",department")
+      .where("city=", "delhi")
+      .where("order_id=("+UniversalSqlBuilder.table("orders as temp").select("temp.id").orderBy("temp.id", "desc").get()+")")
+      .orWhere("seller=", '100')
+      .orWhere("brand=", 'rock')
+      .having("city=", "delhi")
+      .orHaving("seller=", '100')
+      .orHaving("brand=", 'rock')
+      .whereBetween("age", [200, 300])
+      .join("users", "users.id=employee.emp_id", "left")
+      .join("cars", "cars.id=employee.emp_id")
+      .groupBy("name")
+      .orderBy("ID", "desc")
+      .limit(10, 20).get())
+</code><br><br>
+SELECT 
+    id, name, department
+FROM
+    employee
+        LEFT JOIN
+    users ON users.id = employee.emp_id
+        INNER JOIN
+    cars ON cars.id = employee.emp_id
+WHERE
+    city = 'delhi'
+        AND order_id = (SELECT 
+            temp.id
+        FROM
+            orders AS temp
+        ORDER BY temp.id DESC)
+        AND age >= 200
+        AND age <= 300
+        AND (seller = '100' OR brand = 'rock')
+GROUP BY name
+HAVING city = 'delhi'
+    AND (seller = '100' OR brand = 'rock')
+ORDER BY ID DESC
+LIMIT 20 , 10
+<br/>
+
+
 
 
 <!--New Section **************************

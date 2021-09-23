@@ -12,6 +12,18 @@ class SqlLoader:
     sqlOrderBy=str("")
     sqlGroupBy=str("")
 
+    def __init__(self) -> None:
+        self.tableName = ""
+        self.selectList = list()
+        self.whereList = list()
+        self.havingList = list()
+        self.orWhereList = list()
+        self.orHavingList = list()
+        self.sqlLimit = str("")
+        self.sqlJoinList = list()
+        self.sqlOrderBy = str("")
+        self.sqlGroupBy = str("")
+
     def table(self, tableName):
         self.tableName = tableName
         return self
