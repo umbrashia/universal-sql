@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="universal-sql-builder",                     # This is the name of the package
-    version="0.0.7",                        # The initial release version
+    version="0.0.8",                        # The initial release version
     author="Shantanu SHarma",                     # Full name of the author
     description="""Create sql query with the help of sql builder magic function help to 
     make automatic sql query its help in build sql query string for Microsoft SQL, MySql, SqlLite,

@@ -113,6 +113,8 @@ class SqlLoader:
             sql += (" OR ".join(self.orWhereList)).strip()
             if len(self.orWhereList)>1:
                 sql+=")"
+        if self.sqlGroupBy.strip():
+            sql+=" "+self.sqlGroupBy
         if self.havingList or self.orHavingList:
             sql += " HAVING "
         if self.havingList:
@@ -125,8 +127,6 @@ class SqlLoader:
             sql += (" OR ".join(self.orHavingList)).strip()
             if len(self.orHavingList)>1:
                 sql+=")"
-        if self.sqlGroupBy.strip():
-            sql+=self.sqlGroupBy
         if self.sqlOrderBy.strip():
             sql+=self.sqlOrderBy
         if self.sqlLimit.strip():
